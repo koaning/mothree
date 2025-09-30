@@ -25,7 +25,7 @@ def _(ThreeWidget, mo, random):
             "z": random.uniform(-3, 3),
             "color": random.choice(["red", "green", "blue", "yellow", "magenta"]),
         }
-        for _ in range(50_000)
+        for _ in range(5_000)
     ]
 
     scatter_widget = mo.ui.anywidget(ThreeWidget(data=scatter_data, dark_mode=True))
