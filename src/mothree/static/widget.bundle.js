@@ -20729,7 +20729,7 @@ function interceptControlUp(event) {
   }
 }
 
-// src/mothree/widget.js
+// src/mothree/static/widget.js
 function render({ model, el }) {
   const container = document.createElement("div");
   container.style.position = "relative";

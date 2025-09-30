@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>example</title>
+    <script type="module" crossorigin src="./assets/index-C1SHFMCp.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C0iXCvyY.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.16.3%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%23%20MoThree%20-%203D%20Chart%20Widget%20with%20Three.js%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22This%20library%20gives%20a%20simple%20wrapper%20around%20three.js%20to%20make%203d%20charts.%20It's%20also%20pretty%20performant!%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ThreeWidget%2C%20mo%2C%20random)%3A%0A%20%20%20%20scatter_data%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22x%22%3A%20random.uniform(-3%2C%203)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22y%22%3A%20random.uniform(-3%2C%203)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22z%22%3A%20random.uniform(-3%2C%203)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22color%22%3A%20random.choice(%5B%22red%22%2C%20%22green%22%2C%20%22blue%22%2C%20%22yellow%22%2C%20%22magenta%22%5D)%2C%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20for%20_%20in%20range(50_000)%0A%20%20%20%20%5D%0A%0A%20%20%20%20scatter_widget%20%3D%20mo.ui.anywidget(ThreeWidget(data%3Dscatter_data%2C%20dark_mode%3DTrue))%0A%20%20%20%20scatter_widget%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%23%23%203D%20Grid%20Visualization%5CnCreate%20a%20grid%20of%20points%20in%203D%20space.%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ThreeWidget%2C%20random)%3A%0A%20%20%20%20%23%20Generate%20grid%20data%20with%20positioned%20points%0A%20%20%20%20grid_data%20%3D%20%5B%5D%0A%20%20%20%20for%20_i%20in%20range(5)%3A%0A%20%20%20%20%20%20%20%20for%20_j%20in%20range(5)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20grid_data.append(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22x%22%3A%20_i%20-%202%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22y%22%3A%20random.uniform(0.5%2C%203)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22z%22%3A%20_j%20-%202%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22color%22%3A%20%22steelblue%22%20if%20(_i%20%2B%20_j)%20%25%202%20%3D%3D%200%20else%20%22coral%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20grid_widget%20%3D%20ThreeWidget(data%3Dgrid_data%2C%20width%3D800%2C%20height%3D500%2C%20show_grid%3DTrue)%0A%20%20%20%20grid_widget%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%23%23%20Mathematical%20Function%20Visualization%5CnVisualize%20a%20mathematical%20function%20in%203D.%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ThreeWidget%2C%20math)%3A%0A%20%20%20%20%23%20Create%20a%20wave%20pattern%0A%20%20%20%20wave_data%20%3D%20%5B%5D%0A%20%20%20%20for%20i%20in%20range(-100%2C%20110%2C%201)%3A%0A%20%20%20%20%20%20%20%20for%20j%20in%20range(-100%2C%20110%2C%201)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20x%20%3D%20i%20*%200.1%0A%20%20%20%20%20%20%20%20%20%20%20%20z%20%3D%20j%20*%200.1%0A%20%20%20%20%20%20%20%20%20%20%20%20y%20%3D%20math.sin(math.sqrt(x**2%20%2B%20z**2))%20*%202%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Color%20based%20on%20height%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20y%20%3E%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%20%3D%20%22red%22%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%20%3D%20%22blue%22%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20wave_data.append(%7B%22x%22%3A%20x%2C%20%22y%22%3A%20y%2C%20%22z%22%3A%20z%2C%20%22color%22%3A%20color%7D)%0A%0A%20%20%20%20wave_widget%20%3D%20ThreeWidget(data%3Dwave_data%2C%20width%3D700%2C%20height%3D600)%0A%20%20%20%20wave_widget%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20mothree%20import%20ThreeWidget%0A%20%20%20%20import%20random%0A%20%20%20%20import%20math%0A%20%20%20%20return%20ThreeWidget%2C%20math%2C%20random%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.16.3",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

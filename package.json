@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/mothree/widget.js --bundle --format=esm --outfile=src/mothree/widget.bundle.js"
+    "build": "esbuild src/mothree/static/widget.js --bundle --format=esm --outfile=src/mothree/static/widget.bundle.js"
   },
   "devDependencies": {
     "esbuild": "^0.24.2",

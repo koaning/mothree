@@ -4,20 +4,6 @@ __generated_with = "0.16.3"
 app = marimo.App(width="medium")
 
 
-@app.cell
-def _():
-    import marimo as mo
-    return (mo,)
-
-
-@app.cell
-def _():
-    from mothree import ThreeWidget
-    import random
-    import math
-    return ThreeWidget, math, random
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""# MoThree - 3D Chart Widget with Three.js""")
@@ -26,19 +12,18 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""## 3D Scatter Plot\nCreate a scatter plot with random points in 3D space.""")
+    mo.md("""This library gives a simple wrapper around three.js to make 3d charts. It's also pretty performant! """)
     return
 
 
 @app.cell
 def _(ThreeWidget, mo, random):
-    # Generate random scatter data
     scatter_data = [
         {
             "x": random.uniform(-3, 3),
             "y": random.uniform(-3, 3),
             "z": random.uniform(-3, 3),
-            "color": random.choice(["red", "green", "blue", "yellow", "magenta"])
+            "color": random.choice(["red", "green", "blue", "yellow", "magenta"]),
         }
         for _ in range(50_000)
     ]
@@ -60,14 +45,16 @@ def _(ThreeWidget, random):
     grid_data = []
     for _i in range(5):
         for _j in range(5):
-            grid_data.append({
-                "x": _i - 2,
-                "y": random.uniform(0.5, 3),
-                "z": _j - 2,
-                "color": "steelblue" if (_i + _j) % 2 == 0 else "coral"
-            })
+            grid_data.append(
+                {
+                    "x": _i - 2,
+                    "y": random.uniform(0.5, 3),
+                    "z": _j - 2,
+                    "color": "steelblue" if (_i + _j) % 2 == 0 else "coral",
+                }
+            )
 
-    grid_widget = ThreeWidget(data=grid_data, width=800, height=500)
+    grid_widget = ThreeWidget(data=grid_data, width=800, height=500, show_grid=True)
     grid_widget
     return
 
@@ -103,7 +90,16 @@ def _(ThreeWidget, math):
 
 @app.cell
 def _():
-    return
+    from mothree import ThreeWidget
+    import random
+    import math
+    return ThreeWidget, math, random
+
+
+@app.cell
+def _():
+    import marimo as mo
+    return (mo,)
 
 
 if __name__ == "__main__":

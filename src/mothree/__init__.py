@@ -49,8 +49,8 @@ class ThreeWidget(anywidget.AnyWidget):
     >>> widget = ThreeWidget(data=data, dark_mode=True, show_grid=False, width=800, height=600)
     """
 
-    _esm = pathlib.Path(__file__).parent / "widget.bundle.js"
-    _css = pathlib.Path(__file__).parent / "widget.css"
+    _esm = pathlib.Path(__file__).parent / "static" / "widget.bundle.js"
+    _css = pathlib.Path(__file__).parent / "static" / "widget.css"
 
     # Data for the 3D chart
     data = traitlets.List([]).tag(sync=True)
